@@ -1,0 +1,67 @@
+def calculate_bmi(weight, height):
+    """Calculates the Body Mass Index (BMI) given weight and height.
+
+    Args:
+        weight (float): Weight in kilograms.
+        height (float): Height in meters.
+
+    Returns:
+        float: The calculated BMI value.
+    """
+
+    # Convert weight and height to floats before comparison
+    weight = float(weight)
+    height = float(height)
+
+    if weight <= 0 or height <= 0:
+        raise ValueError("Weight and height must be positive values.")
+
+    bmi = weight / (height**2)  # Calculate BMI
+    return round(bmi, 2)  # Round BMI to two decimal places
+
+def interpret_bmi(bmi):
+    """Interprets the calculated BMI value and returns a descriptive message.
+
+    Args:
+        bmi (float): The calculated BMI value.
+
+    Returns:
+        str: A message describing the BMI category and potential health implications.
+    """
+
+    if bmi <= 18.5:
+        return "Underweight: Consult a doctor if concerned."
+    elif 18.5 < bmi <= 24.9:
+        return "Normal weight: Continue healthy lifestyle habits."
+    elif 25 <= bmi <= 29.9:
+        return "Overweight: Consider managing weight with healthy diet and exercise."
+    elif 30 <= bmi <= 34.9:
+        return "Obese Class I: Seek professional guidance for safe weight management."
+    elif 35 <= bmi <= 39.9:
+        return "Obese Class II: Seek professional guidance and support for weight management."
+    else:
+        return "Obese Class III: Consult a doctor or specialist for personalized advice."
+
+def main():
+    """Prompts the user for input, calculates BMI, and provides interpretation."""
+
+    while True:
+        try:
+            weight = input("Enter your weight in kilograms: ")
+            height = input("Enter your height in meters: ")
+
+            weight = float(weight)  # Convert input to floats
+            height = float(height)
+
+            bmi = calculate_bmi(weight, height)
+            interpretation = interpret_bmi(bmi)
+
+            print(f"Your BMI is {bmi:.2f}.")
+            print(interpretation)
+
+            break  # Exit loop after successful calculation
+        except ValueError as e:
+            print("Invalid input! Please enter positive values for weight and height.")
+
+if __name__ == "__main__":
+    main()
